@@ -1,0 +1,46 @@
+/* ===== Form Styles ===== */
+
+#form {
+    background-color: #ffffff;
+}
+
+#form  QLabel {
+
+
+
+    padding-top: 12px;
+}
+
+#form QLineEdit {
+    background-color: #232323;
+    border: 1.5px solid #cfe3ee;
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 13px;
+    color: #ffffff;
+    selection-background-color: #7fc8e8;
+}
+
+
+
+
+
+#form QPushButton {
+    background-color: #00A550;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-size: 13px;
+
+}
+
+
+#title {
+background-color: #96c6ff;
+border-radius: 5px;
+font-size : 9pt;
+padding:12px;
+color:black
+
+}

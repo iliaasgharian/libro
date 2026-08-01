@@ -1,0 +1,116 @@
+/* ================================
+        BOOK FILTER FORM
+================================ */
+
+QWidget#book_filter_form {
+    background-color: #1f1f1f;
+    padding: 15px;
+}
+
+QLabel#filterTitle {
+    color: #16a085;
+    font-size: 12pt;
+    font-weight: bold;
+    padding-top: 8px;
+    padding-bottom: 4px;
+}
+
+QComboBox {
+    background-color: #2b2b2b;
+    color: white;
+    border: 1px solid #555;
+    border-radius: 6px;
+    padding: 6px;
+    min-height: 30px;
+}
+
+QComboBox:hover {
+    border: 1px solid #16a085;
+}
+
+QComboBox:focus {
+    border: 1px solid #16a085;
+}
+
+QComboBox::drop-down {
+    border: none;
+    width: 25px;
+}
+
+QComboBox QAbstractItemView {
+    background-color: #2b2b2b;
+    color: white;
+    border: 1px solid #444;
+    selection-background-color: #16a085;
+}
+
+QListWidget {
+    background-color: #2b2b2b;
+    color: white;
+    border: 1px solid #555;
+    border-radius: 6px;
+    outline: none;
+    padding: 5px;
+}
+
+QListWidget::item {
+    padding: 6px;
+    border-radius: 4px;
+}
+
+QListWidget::item:hover {
+    background-color: #3a3a3a;
+}
+
+QListWidget::item:selected {
+    background-color: #16a085;
+    color: white;
+}
+
+QScrollBar:vertical {
+    background: transparent;
+    width: 10px;
+}
+
+QScrollBar::handle:vertical {
+    background: #555;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #16a085;
+}
+
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+    height: 0px;
+}
+
+QPushButton#btn_apply {
+    background-color: #16a085;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    min-height: 35px;
+    font-size: 11pt;
+}
+
+QPushButton#btn_apply:hover {
+    background-color: #1abc9c;
+}
+
+QPushButton#btn_apply:pressed {
+    background-color: #12876f;
+}
+
+QPushButton#btn_cancel {
+    background-color: #333;
+    border: 1px solid #555;
+    border-radius: 6px;
+    color: white;
+    min-height: 35px;
+}
+
+QPushButton#btn_cancel:hover {
+    background-color: #444;
+}
