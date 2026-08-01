@@ -183,7 +183,7 @@ class BookFilterForm(QWidget):
 
         # --- Age group / Release date ---
         self.age_group_edit = QLineEdit()
-        self.age_group_edit.setPlaceholderText("e.g. 12+")
+        self.age_group_edit.setPlaceholderText("e.g. Adult")
 
         self.release_date_edit = QDateEdit()
         self.release_date_edit.setCalendarPopup(True)

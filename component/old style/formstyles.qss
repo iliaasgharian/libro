@@ -26,7 +26,7 @@
 
 
 #form QPushButton {
-    background-color: #7C3AED;
+    background-color: #00A550;
     color: white;
     border: none;
     border-radius: 8px;
@@ -37,7 +37,7 @@
 
 
 #title {
-background-color: #C9A9FA;
+background-color: #96c6ff;
 border-radius: 5px;
 font-size : 9pt;
 padding:12px;

@@ -26,7 +26,7 @@ QPushButton#boButton:hover {
 
 
 QPushButton#addbutton {
-    background-color: #7C3AED;
+    background-color: #268846;
     color: white;
     border: none;
     border-radius: 4px;

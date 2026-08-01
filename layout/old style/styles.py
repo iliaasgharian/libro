@@ -6,7 +6,7 @@ QMainWindow {
 QMenuBar {
     background-color: #2b2b2b;
     color: #f0f0f0;
-    border-bottom: 1px solid #7C5CFC;
+    border-bottom: 1px solid #00A86B;
     padding: 4px;
 }
 
@@ -99,11 +99,11 @@ QLineEdit {
     border-radius: 6px;
     padding: 4px 8px;
     min-height: 25px;
-    selection-background-color: #7C5CFC;
+    selection-background-color: #0078d7;
 }
 
 QLineEdit:focus {
-    border: 1px solid #7C5CFC;
+    border: 1px solid #0078d7;
     background-color: #333333;
 }
 
@@ -118,11 +118,11 @@ QComboBox {
 }
 
 QComboBox:hover {
-    border: 1px solid #7C5CFC;
+    border: 1px solid #0078d7;
 }
 
 QComboBox:focus {
-    border: 1px solid #7C5CFC;
+    border: 1px solid #0078d7;
     background-color: #333333;
 }
 
@@ -156,12 +156,12 @@ QCheckBox::indicator {
 }
 
 QCheckBox::indicator:hover {
-    border: 1px solid #7C5CFC;
+    border: 1px solid #0078d7;
 }
 
 QCheckBox::indicator:checked {
-    background-color: #7C5CFC;
-    border: 1px solid #7C5CFC;
+    background-color: #0078d7;
+    border: 1px solid #0078d7;
 }
 
 /* Common buttons */
@@ -185,60 +185,21 @@ QPushButton:pressed {
 
 /* Specific buttons */
 QPushButton#btn_send {
-    background-color: #7C5CFC;
-    border: 1px solid #7C5CFC;
+    background-color: #0078d7;
+    border: 1px solid #0078d7;
 }
 
 QPushButton#btn_send:hover {
-    background-color: #8F72FD;
+    background-color: #1a86e0;
 }
 
 QPushButton#btn_add_book {
-    background-color: #9333EA;
-    border: 1px solid #9333EA;
+    background-color: #16a085;
+    border: 1px solid #16a085;
 }
 
 QPushButton#btn_add_book:hover {
-    background-color: #A855F7;
-}
-
-/* Message boxes (warning / error / info / question popups) */
-QMessageBox {
-    background-color: #232323;
-}
-
-QMessageBox QLabel {
-    color: #f0f0f0;
-    font-size: 10pt;
-}
-
-QMessageBox QPushButton {
-    background-color: #3a3a3a;
-    color: white;
-    border: 1px solid #555555;
-    border-radius: 6px;
-    padding: 7px 20px;
-    min-width: 70px;
-    min-height: 25px;
-}
-
-QMessageBox QPushButton:hover {
-    background-color: #4a4a4a;
-    border: 1px solid #666666;
-}
-
-QMessageBox QPushButton:pressed {
-    background-color: #2f2f2f;
-}
-
-QMessageBox QPushButton:default {
-    background-color: #7C5CFC;
-    border: 1px solid #7C5CFC;
-    color: white;
-}
-
-QMessageBox QPushButton:default:hover {
-    background-color: #8F72FD;
+    background-color: #1bb39a;
 }
 
 /* Stack area */
