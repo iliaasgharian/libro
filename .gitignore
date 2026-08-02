@@ -1,6 +1,0 @@
-venv/
-__pycache__/
-*.pyc
-Test.py
-Test2.py
-NewLibrary.db
