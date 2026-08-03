@@ -63,7 +63,7 @@ class MainWindow(QMainWindow):
         exit_action.triggered.connect(self.close)
 
     def activate_side_button(self, active_button):
-
+        """پس‌زمینه‌ی دکمه‌ی کلیک‌شده رو بنفش می‌کنه و بقیه رو به حالت عادی برمی‌گردونه."""
         for btn in self.side_buttons:
             if btn is active_button:
                 btn.setStyleSheet("background-color: #7C3AED; border: none;")
@@ -121,7 +121,7 @@ class MainWindow(QMainWindow):
         button_resources.setIcon(QIcon("img/file-brackets-curly(W).svg"))
         button_resources.setObjectName("sideButton")
 
-
+        # لیست همه‌ی دکمه‌های سمت چپ برای مدیریت حالت فعال/انتخاب‌شده
         self.side_buttons = [
             button_book, button_user, button_author, button_publisher,
             button_trans, button_language, button_category,
@@ -143,7 +143,8 @@ class MainWindow(QMainWindow):
 
         left_panel = QWidget()
         left_panel.setObjectName("left_panel")
-        left_panel.setFixedWidth(220)
+        left_panel.setMinimumWidth(180)
+        left_panel.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Expanding)
         left_layout = QVBoxLayout(left_panel)
         left_layout.setContentsMargins(0, 0, 0, 0)
 
@@ -274,9 +275,9 @@ class MainWindow(QMainWindow):
 
         right_layout.addWidget(self.right_stack)
         main_layout.addWidget(left_panell)
-        main_layout.addWidget(left_panel)
+        main_layout.addWidget(left_panel, 1)
 
-        main_layout.addWidget(right_panel)
+        main_layout.addWidget(right_panel, 3)
 
 
 

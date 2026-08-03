@@ -64,7 +64,7 @@ The app is now installed and ready to use — no Python, no extra libraries, no 
 - Launch it from the **desktop shortcut** (if you created one), or
 - Open the **Start Menu** and search for **"Library Management System"**
 
-The app comes with a ready-to-use sample database, already filled with example books, authors, and publishers, so you can start browsing right away.
+
 
 ---
 
