@@ -62,6 +62,14 @@ class MainWindow(QMainWindow):
         help_menu.addAction(exit_action)
         exit_action.triggered.connect(self.close)
 
+    def activate_side_button(self, active_button):
+
+        for btn in self.side_buttons:
+            if btn is active_button:
+                btn.setStyleSheet("background-color: #7C3AED; border: none;")
+            else:
+                btn.setStyleSheet("")
+
     def setup_central_widget(self):
         central = QWidget()
         self.setCentralWidget(central)
@@ -79,30 +87,46 @@ class MainWindow(QMainWindow):
 
         button_book = QPushButton("")
         button_book.setIcon(QIcon("img/book(w).svg"))
+        button_book.setObjectName("sideButton")
 
         button_user = QPushButton("")
         button_user.setIcon(QIcon("img/user(w).svg"))
+        button_user.setObjectName("sideButton")
 
         button_author = QPushButton("")
         button_author.setIcon(QIcon("img/pencil-alt(W).svg"))
+        button_author.setObjectName("sideButton")
 
         button_publisher = QPushButton("")
         button_publisher.setIcon(QIcon("img/newspaper(W).svg"))
+        button_publisher.setObjectName("sideButton")
 
         button_trans = QPushButton("")
         button_trans.setIcon(QIcon("img/earth-americas(W).svg"))
+        button_trans.setObjectName("sideButton")
 
         button_language = QPushButton("")
         button_language.setIcon(QIcon("img/language(W).svg"))
+        button_language.setObjectName("sideButton")
 
         button_category = QPushButton("")
         button_category.setIcon(QIcon("img/layer-group(W).svg"))
+        button_category.setObjectName("sideButton")
 
         button_designer = QPushButton("")
         button_designer.setIcon(QIcon("img/compass-drafting(W).svg"))
+        button_designer.setObjectName("sideButton")
 
         button_resources = QPushButton("")
         button_resources.setIcon(QIcon("img/file-brackets-curly(W).svg"))
+        button_resources.setObjectName("sideButton")
+
+
+        self.side_buttons = [
+            button_book, button_user, button_author, button_publisher,
+            button_trans, button_language, button_category,
+            button_designer, button_resources
+        ]
 
 
         left_layout2.addWidget(button_book)
@@ -150,14 +174,15 @@ class MainWindow(QMainWindow):
         self.left_stack.addWidget(self.translator_page)    # index 8
 
         left_layout.addWidget(self.left_stack)
-        button_book.clicked.connect(lambda: self.left_stack.setCurrentIndex(1))
-        button_author.clicked.connect(lambda: self.left_stack.setCurrentIndex(2))
-        button_category.clicked.connect(lambda: self.left_stack.setCurrentIndex(3))
-        button_designer.clicked.connect(lambda: self.left_stack.setCurrentIndex(4))
-        button_language.clicked.connect(lambda: self.left_stack.setCurrentIndex(5))
-        button_publisher.clicked.connect(lambda: self.left_stack.setCurrentIndex(6))
-        button_resources.clicked.connect(lambda: self.left_stack.setCurrentIndex(7))
-        button_trans.clicked.connect(lambda: self.left_stack.setCurrentIndex(8))
+        button_book.clicked.connect(lambda: (self.left_stack.setCurrentIndex(1), self.activate_side_button(button_book)))
+        button_author.clicked.connect(lambda: (self.left_stack.setCurrentIndex(2), self.activate_side_button(button_author)))
+        button_category.clicked.connect(lambda: (self.left_stack.setCurrentIndex(3), self.activate_side_button(button_category)))
+        button_designer.clicked.connect(lambda: (self.left_stack.setCurrentIndex(4), self.activate_side_button(button_designer)))
+        button_language.clicked.connect(lambda: (self.left_stack.setCurrentIndex(5), self.activate_side_button(button_language)))
+        button_publisher.clicked.connect(lambda: (self.left_stack.setCurrentIndex(6), self.activate_side_button(button_publisher)))
+        button_resources.clicked.connect(lambda: (self.left_stack.setCurrentIndex(7), self.activate_side_button(button_resources)))
+        button_trans.clicked.connect(lambda: (self.left_stack.setCurrentIndex(8), self.activate_side_button(button_trans)))
+        button_user.clicked.connect(lambda: self.activate_side_button(button_user))
 
 
 
@@ -185,6 +210,15 @@ class MainWindow(QMainWindow):
 
         welcome_label.setObjectName("welcomeLabel")
         welcome_label.setAlignment(Qt.AlignCenter)
+        welcome_label.setStyleSheet("""
+            QLabel#welcomeLabel {
+                font-family: 'Georgia', 'Times New Roman', serif;
+                font-size: 64px;
+                font-weight: 700;
+                color: #2c3e50;
+                letter-spacing: 3px;
+            }
+        """)
         welcome_layout.addWidget(welcome_label)
 
         self.right_stack = QStackedWidget()
