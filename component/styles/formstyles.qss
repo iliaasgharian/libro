@@ -37,7 +37,7 @@
 
 
 #title {
-background-color: #C9A9FA;
+background-color: #ffffff;
 border-radius: 5px;
 font-size : 9pt;
 padding:12px;
