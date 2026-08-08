@@ -25,58 +25,240 @@ def _display_text(item):
     return str(item)
 
 
-class MultiSelectBox(QPushButton):
+class MultiSelectDialog(QDialog):
     """
-    A dropdown-like box that lets the user pick several options.
-    Clicking it opens a checklist menu; selected options are shown
-    (comma separated) inside the box itself, like a mini "chip" field.
+    A full page/dialog for picking several options out of a list,
+    with a live search box at the top that filters the list as you type.
+    """
+
+    def __init__(self, items, checked_ids, title="Select items", parent=None):
+        super().__init__(parent)
+        self.setObjectName("multiSelectDialog")
+        self.setWindowTitle(title)
+        self.resize(360, 440)
+
+        self._items = list(items)          # list of (id, display_text)
+        self._checked_ids = set(checked_ids)
+        self._checkboxes = {}              # id -> QCheckBox
+        self._rows = {}                    # id -> row widget (for hide/show while searching)
+
+        self.setStyleSheet("""
+            QDialog#multiSelectDialog {
+                background-color: #202020;
+            }
+            QLineEdit#dialogSearchInput {
+                background-color: #2b2b2b;
+                color: #ffffff;
+                border: 1px solid #4a4a4a;
+                border-radius: 6px;
+                padding: 6px 10px;
+            }
+            QScrollArea#multiSelectScroll {
+                background-color: #202020;
+                border: none;
+            }
+            QScrollArea#multiSelectScroll > QWidget > QWidget {
+                background-color: #202020;
+            }
+            QWidget#multiSelectListContent {
+                background-color: #202020;
+            }
+            QCheckBox {
+                color: #f0f0f0;
+                padding: 6px 4px;
+                background-color: transparent;
+            }
+            QCheckBox::indicator {
+                width: 16px;
+                height: 16px;
+                border: 1px solid #5a5a5a;
+                border-radius: 3px;
+                background-color: #2b2b2b;
+            }
+            QCheckBox::indicator:hover {
+                border: 1px solid #7C3AED;
+            }
+            QCheckBox::indicator:checked {
+                background-color: #7C3AED;
+                border: 1px solid #7C3AED;
+            }
+            QCheckBox:hover {
+                background-color: #2f2f2f;
+                border-radius: 4px;
+            }
+            QScrollBar:vertical {
+                background: transparent;
+                width: 8px;
+                margin: 0px;
+            }
+            QScrollBar::handle:vertical {
+                background: #d0d0d0;
+                border-radius: 4px;
+                min-height: 24px;
+            }
+            QScrollBar::handle:vertical:hover {
+                background: #ffffff;
+            }
+            QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+                height: 0px;
+                background: transparent;
+            }
+            QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+                background: transparent;
+            }
+            QLabel#noResultsLabel {
+                color: #888888;
+                padding: 10px;
+            }
+            QPushButton#btn_send {
+                background-color: #7C3AED;
+                color: white;
+                border: none;
+                border-radius: 6px;
+                padding: 6px 16px;
+            }
+        """)
+
+        self.setup_ui()
+
+    def setup_ui(self):
+        layout = QVBoxLayout(self)
+        layout.setContentsMargins(14, 14, 14, 14)
+        layout.setSpacing(10)
+
+        self.search_edit = QLineEdit()
+        self.search_edit.setObjectName("dialogSearchInput")
+        self.search_edit.setPlaceholderText("Search...")
+        self.search_edit.textChanged.connect(self.filter_items)
+        layout.addWidget(self.search_edit)
+
+        self.scroll = QScrollArea()
+        self.scroll.setObjectName("multiSelectScroll")
+        self.scroll.setWidgetResizable(True)
+        self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+
+        self.list_content = QWidget()
+        self.list_content.setObjectName("multiSelectListContent")
+        self.list_layout = QVBoxLayout(self.list_content)
+        self.list_layout.setContentsMargins(0, 0, 0, 0)
+        self.list_layout.setSpacing(2)
+
+        for item_id, text in self._items:
+            checkbox = QCheckBox(text)
+            checkbox.setChecked(item_id in self._checked_ids)
+            checkbox.stateChanged.connect(
+                lambda state, i=item_id: self._on_check_changed(i, state)
+            )
+            self._checkboxes[item_id] = checkbox
+            self.list_layout.addWidget(checkbox)
+
+        self.no_results_label = QLabel("No matches found")
+        self.no_results_label.setObjectName("noResultsLabel")
+        self.no_results_label.setAlignment(Qt.AlignCenter)
+        self.no_results_label.hide()
+        self.list_layout.addWidget(self.no_results_label)
+
+        self.list_layout.addStretch()
+        self.scroll.setWidget(self.list_content)
+        layout.addWidget(self.scroll)
+
+        btn_layout = QHBoxLayout()
+        self.btn_clear = QPushButton("Clear all")
+        self.btn_done = QPushButton("Done")
+        self.btn_done.setObjectName("btn_send")
+        btn_layout.addWidget(self.btn_clear)
+        btn_layout.addStretch()
+        btn_layout.addWidget(self.btn_done)
+        layout.addLayout(btn_layout)
+
+        self.btn_clear.clicked.connect(self.clear_all)
+        self.btn_done.clicked.connect(self.accept)
+
+    def _on_check_changed(self, item_id, state):
+        if state == Qt.Checked:
+            self._checked_ids.add(item_id)
+        else:
+            self._checked_ids.discard(item_id)
+
+    def filter_items(self, text):
+        text = text.strip().lower()
+        any_visible = False
+        for item_id, checkbox in self._checkboxes.items():
+            match = text in checkbox.text().lower()
+            checkbox.setVisible(match)
+            any_visible = any_visible or match
+        self.no_results_label.setVisible(not any_visible)
+
+    def clear_all(self):
+        for checkbox in self._checkboxes.values():
+            checkbox.setChecked(False)
+
+    def selected_ids(self):
+        return list(self._checked_ids)
+
+
+class MultiSelectBox(QWidget):
+    """
+    A compact field for picking several options: a small read-only
+    box that shows the currently selected names, plus a tiny "..."
+    button next to it that opens the full-page picker dialog.
+    Sized to its content, not stretched across the row.
     """
     selection_changed = pyqtSignal()
 
-    def __init__(self, placeholder="Select...", parent=None):
+    def __init__(self, title="Select...", placeholder="None selected", parent=None):
         super().__init__(parent)
         self.setObjectName("multiSelectBox")
+        self.title = title
         self.placeholder = placeholder
-        self.setText(placeholder)
-        self.setCursor(QCursor(Qt.PointingHandCursor))
-        self.setLayoutDirection(Qt.LeftToRight)
 
         self._items = {}          # id -> display text
         self._objects = {}        # id -> original adapter object
         self._checked_ids = set()
 
-        self.menu = QMenu(self)
-        self.menu.setObjectName("multiSelectMenu")
+        self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+
+        layout = QHBoxLayout(self)
+        layout.setContentsMargins(0, 0, 0, 0)
+        layout.setSpacing(6)
+
+        self.display = QLineEdit()
+        self.display.setObjectName("multiSelectDisplay")
+        self.display.setReadOnly(True)
+        self.display.setPlaceholderText(placeholder)
+        self.display.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        self.display.setCursor(QCursor(Qt.ArrowCursor))
+
+        self.open_btn = QPushButton("...")
+        self.open_btn.setObjectName("multiSelectOpenBtn")
+        self.open_btn.setFixedWidth(32)
+        self.open_btn.setCursor(QCursor(Qt.PointingHandCursor))
+        self.open_btn.clicked.connect(self._show_dialog)
+
+        layout.addWidget(self.display)
+        layout.addWidget(self.open_btn)
 
         self.setStyleSheet("""
-            QPushButton#multiSelectBox {
+            QLineEdit#multiSelectDisplay {
                 background-color: #2b2b2b;
                 color: #ffffff;
                 border: 1px solid #4a4a4a;
                 border-radius: 6px;
                 padding: 4px 8px;
                 min-height: 25px;
-                text-align: left;
             }
-            QPushButton#multiSelectBox:hover {
-                border: 1px solid #0078d7;
-            }
-            QMenu#multiSelectMenu {
+            QPushButton#multiSelectOpenBtn {
                 background-color: #2b2b2b;
-                color: #f0f0f0;
-                border: 1px solid #3a3a3a;
-                padding: 4px;
+                color: #ffffff;
+                border: 1px solid #4a4a4a;
+                border-radius: 6px;
+                min-height: 25px;
             }
-            QMenu#multiSelectMenu::item {
-                padding: 6px 10px;
-                border-radius: 4px;
-            }
-            QMenu#multiSelectMenu::item:selected {
-                background-color: #4a4a4a;
+            QPushButton#multiSelectOpenBtn:hover {
+                border: 1px solid #7C3AED;
+                color: #7C3AED;
             }
         """)
-
-        self.clicked.connect(self._show_menu)
 
     def set_items(self, items):
         """items: iterable of (id, display_text, original_object)"""
@@ -86,38 +268,22 @@ class MultiSelectBox(QPushButton):
             self._items[item_id] = text
             self._objects[item_id] = obj
         self._checked_ids.clear()
-        self._rebuild_menu()
         self._update_text()
 
-    def _rebuild_menu(self):
-        self.menu.clear()
-        for item_id, text in self._items.items():
-            action = QWidgetAction(self.menu)
-            checkbox = QCheckBox(text, self.menu)
-            checkbox.setChecked(item_id in self._checked_ids)
-            checkbox.stateChanged.connect(
-                lambda state, i=item_id: self._on_check_changed(i, state)
-            )
-            action.setDefaultWidget(checkbox)
-            self.menu.addAction(action)
-
-    def _on_check_changed(self, item_id, state):
-        if state == Qt.Checked:
-            self._checked_ids.add(item_id)
-        else:
-            self._checked_ids.discard(item_id)
-        self._update_text()
-        self.selection_changed.emit()
+    def _show_dialog(self):
+        items = list(self._items.items())
+        dialog = MultiSelectDialog(items, self._checked_ids, title=self.title, parent=self.window())
+        if dialog.exec_() == QDialog.Accepted:
+            self._checked_ids = set(dialog.selected_ids())
+            self._update_text()
+            self.selection_changed.emit()
 
     def _update_text(self):
         if not self._checked_ids:
-            self.setText(self.placeholder)
+            self.display.setText("")
             return
         selected_texts = [self._items[i] for i in self._checked_ids if i in self._items]
-        self.setText(", ".join(selected_texts))
-
-    def _show_menu(self):
-        self.menu.exec_(self.mapToGlobal(self.rect().bottomLeft()))
+        self.display.setText(", ".join(selected_texts))
 
     def selected_ids(self):
         return list(self._checked_ids)
@@ -127,7 +293,6 @@ class MultiSelectBox(QPushButton):
 
     def clear_selection(self):
         self._checked_ids.clear()
-        self._rebuild_menu()
         self._update_text()
 
 
@@ -213,27 +378,27 @@ class BookFilterForm(QWidget):
         ))
 
         # --- Authors (multi select) ---
-        self.author_multi = MultiSelectBox(placeholder="Select authors...")
+        self.author_multi = MultiSelectBox(title="Select authors...")
         layout.addLayout(self._labeled_field("Authors", self.author_multi))
 
         # --- Languages (multi select) ---
-        self.language_multi = MultiSelectBox(placeholder="Select languages...")
+        self.language_multi = MultiSelectBox(title="Select languages...")
         layout.addLayout(self._labeled_field("Languages", self.language_multi))
 
         # --- Categories (multi select) ---
-        self.category_multi = MultiSelectBox(placeholder="Select categories...")
+        self.category_multi = MultiSelectBox(title="Select categories...")
         layout.addLayout(self._labeled_field("Categories", self.category_multi))
 
         # --- Cover Designers (multi select) ---
-        self.designer_multi = MultiSelectBox(placeholder="Select cover designers...")
+        self.designer_multi = MultiSelectBox(title="Select cover designers...")
         layout.addLayout(self._labeled_field("Cover Designers", self.designer_multi))
 
         # --- Translators (multi select) ---
-        self.translator_multi = MultiSelectBox(placeholder="Select translators...")
+        self.translator_multi = MultiSelectBox(title="Select translators...")
         layout.addLayout(self._labeled_field("Translators", self.translator_multi))
 
         # --- Resources (multi select) ---
-        self.resource_multi = MultiSelectBox(placeholder="Select resources...")
+        self.resource_multi = MultiSelectBox(title="Select resources...")
         layout.addLayout(self._labeled_field("Resources", self.resource_multi))
 
         layout.addStretch()
