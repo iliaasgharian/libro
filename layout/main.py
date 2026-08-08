@@ -217,7 +217,7 @@ class MainWindow(QMainWindow):
                 font-size: 64px;
                 font-weight: 700;
                 color: #2c3e50;
-                letter-spacing: 3px;
+                letter-spacing: 3.1px;
             }
         """)
         welcome_layout.addWidget(welcome_label)
