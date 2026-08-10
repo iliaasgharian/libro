@@ -169,8 +169,8 @@ class MainWindow(QMainWindow):
         self.left_stack.addWidget(self.author_page)        # index 2
         self.left_stack.addWidget(self.category_page)      # index 3
         self.left_stack.addWidget(self.designer_page)      # index 4
-        self.left_stack.addWidget(self.language_page)      # index 5
-        self.left_stack.addWidget(self.publisher_page)     # index 6
+        self.left_stack.addWidget(self.language_page)
+        self.left_stack.addWidget(self.publisher_page)
         self.left_stack.addWidget(self.resource_page)
         self.left_stack.addWidget(self.translator_page)
 
