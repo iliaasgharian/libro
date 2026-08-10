@@ -28,8 +28,8 @@ from component.book.BookFilterForm import BookFilterForm
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle(" Libro ")
-        self.setGeometry(100, 100, 800, 500)
+        self.setWindowTitle("Libro Library")
+        self.setGeometry(100, 100, 900, 500)
         self.setup_menu()
         self.setup_central_widget()
 
@@ -164,11 +164,11 @@ class MainWindow(QMainWindow):
 
         self.left_stack=QStackedWidget()
 
-        self.left_stack.addWidget(self.empty_left_page)   # index 0
-        self.left_stack.addWidget(self.book_page)          # index 1
-        self.left_stack.addWidget(self.author_page)        # index 2
-        self.left_stack.addWidget(self.category_page)      # index 3
-        self.left_stack.addWidget(self.designer_page)      # index 4
+        self.left_stack.addWidget(self.empty_left_page)
+        self.left_stack.addWidget(self.book_page)
+        self.left_stack.addWidget(self.author_page)
+        self.left_stack.addWidget(self.category_page)
+        self.left_stack.addWidget(self.designer_page)
         self.left_stack.addWidget(self.language_page)
         self.left_stack.addWidget(self.publisher_page)
         self.left_stack.addWidget(self.resource_page)
