@@ -171,8 +171,8 @@ class MainWindow(QMainWindow):
         self.left_stack.addWidget(self.designer_page)      # index 4
         self.left_stack.addWidget(self.language_page)      # index 5
         self.left_stack.addWidget(self.publisher_page)     # index 6
-        self.left_stack.addWidget(self.resource_page)      # index 7
-        self.left_stack.addWidget(self.translator_page)    # index 8
+        self.left_stack.addWidget(self.resource_page)
+        self.left_stack.addWidget(self.translator_page)
 
         left_layout.addWidget(self.left_stack)
         button_book.clicked.connect(lambda: (self.left_stack.setCurrentIndex(1), self.activate_side_button(button_book)))
