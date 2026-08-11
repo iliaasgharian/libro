@@ -566,7 +566,7 @@ class BookFilterForm(QWidget):
             QMessageBox.critical(self, "Error ", str(e))
             return
 
-        QMessageBox.information(self, "Success", "The book was successfully added.")
+        QMessageBox.information(self, "Success", "successfully added.")
         self.filters_applied.emit(values)
         self.book_saved.emit()
         self.reset_filters()
