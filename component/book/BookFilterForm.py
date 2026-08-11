@@ -390,15 +390,15 @@ class BookFilterForm(QWidget):
         layout.addLayout(self._labeled_field("Categories", self.category_multi))
 
         # --- Cover Designers (multi select) ---
-        self.designer_multi = MultiSelectBox(title="Select cover designers...")
+        self.designer_multi = MultiSelectBox(title="Select cover designers ...")
         layout.addLayout(self._labeled_field("Cover Designers", self.designer_multi))
 
         # --- Translators (multi select) ---
-        self.translator_multi = MultiSelectBox(title="Select translators...")
+        self.translator_multi = MultiSelectBox(title="Select translators ...")
         layout.addLayout(self._labeled_field("Translators", self.translator_multi))
 
         # --- Resources (multi select) ---
-        self.resource_multi = MultiSelectBox(title="Select resources...")
+        self.resource_multi = MultiSelectBox(title="Select resources ...")
         layout.addLayout(self._labeled_field("Resources", self.resource_multi))
 
         layout.addStretch()
