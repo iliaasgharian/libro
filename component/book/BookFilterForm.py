@@ -378,15 +378,15 @@ class BookFilterForm(QWidget):
         ))
 
         # --- Authors (multi select) ---
-        self.author_multi = MultiSelectBox(title="Select authors...")
+        self.author_multi = MultiSelectBox(title="Select authors ...")
         layout.addLayout(self._labeled_field("Authors", self.author_multi))
 
         # --- Languages (multi select) ---
-        self.language_multi = MultiSelectBox(title="Select languages...")
+        self.language_multi = MultiSelectBox(title="Select languages ...")
         layout.addLayout(self._labeled_field("Languages", self.language_multi))
 
         # --- Categories (multi select) ---
-        self.category_multi = MultiSelectBox(title="Select categories...")
+        self.category_multi = MultiSelectBox(title="Select categories ...")
         layout.addLayout(self._labeled_field("Categories", self.category_multi))
 
         # --- Cover Designers (multi select) ---
