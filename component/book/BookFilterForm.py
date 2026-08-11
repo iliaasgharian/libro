@@ -563,7 +563,7 @@ class BookFilterForm(QWidget):
         try:
             BookDataAdapter.insert(book)
         except Exception as e:
-            QMessageBox.critical(self, "Error", str(e))
+            QMessageBox.critical(self, "Error ", str(e))
             return
 
         QMessageBox.information(self, "Success", "The book was successfully added.")
