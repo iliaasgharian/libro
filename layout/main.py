@@ -284,7 +284,7 @@ class MainWindow(QMainWindow):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setStyleSheet(APP_STYLE)
-
+    app.setWindowIcon(QIcon("img/books.svg"))
     window = MainWindow()
     window.show()
 
