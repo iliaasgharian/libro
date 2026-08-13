@@ -80,9 +80,9 @@ class MainWindow(QMainWindow):
 
         left_panell = QWidget()
         left_panell.setObjectName("left_panell")
-        left_panell.setFixedWidth(45)
+        left_panell.setFixedWidth(48)
         left_layout2 = QVBoxLayout(left_panell)
-        left_layout2.setContentsMargins(0, 7, 2, 0)
+        left_layout2.setContentsMargins(3, 7, 2, 0)
         left_layout2.setSpacing(0)
 
         button_book = QPushButton("")
