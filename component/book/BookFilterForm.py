@@ -15,10 +15,7 @@ from models.book import Book
 
 
 def _display_text(item):
-    """
-    Adapter objects don't all share the same field name
-    (Book uses .title, most others use .name) so try both.
-    """
+
     for attr in ("name", "title"):
         if hasattr(item, attr):
             return getattr(item, attr)
@@ -26,10 +23,6 @@ def _display_text(item):
 
 
 class MultiSelectDialog(QDialog):
-    """
-    A full page/dialog for picking several options out of a list,
-    with a live search box at the top that filters the list as you type.
-    """
 
     def __init__(self, items, checked_ids, title="Select items", parent=None):
         super().__init__(parent)
@@ -37,10 +30,10 @@ class MultiSelectDialog(QDialog):
         self.setWindowTitle(title)
         self.resize(360, 440)
 
-        self._items = list(items)          # list of (id, display_text)
+        self._items = list(items)
         self._checked_ids = set(checked_ids)
-        self._checkboxes = {}              # id -> QCheckBox
-        self._rows = {}                    # id -> row widget (for hide/show while searching)
+        self._checkboxes = {}
+        self._rows = {}
 
         self.setStyleSheet("""
             QDialog#multiSelectDialog {
@@ -198,12 +191,7 @@ class MultiSelectDialog(QDialog):
 
 
 class MultiSelectBox(QWidget):
-    """
-    A compact field for picking several options: a small read-only
-    box that shows the currently selected names, plus a tiny "..."
-    button next to it that opens the full-page picker dialog.
-    Sized to its content, not stretched across the row.
-    """
+
     selection_changed = pyqtSignal()
 
     def __init__(self, title="Select...", placeholder="None selected", parent=None):
@@ -229,7 +217,7 @@ class MultiSelectBox(QWidget):
         self.display.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         self.display.setCursor(QCursor(Qt.ArrowCursor))
 
-        self.open_btn = QPushButton("...")
+        self.open_btn = QPushButton(".")
         self.open_btn.setObjectName("multiSelectOpenBtn")
         self.open_btn.setFixedWidth(32)
         self.open_btn.setCursor(QCursor(Qt.PointingHandCursor))
