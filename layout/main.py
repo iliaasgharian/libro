@@ -28,7 +28,7 @@ from component.book.BookFilterForm import BookFilterForm
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Libro Library")
+        self.setWindowTitle("Libro")
         self.setGeometry(100, 100, 900, 400)
         self.setup_menu()
         self.setup_central_widget()
