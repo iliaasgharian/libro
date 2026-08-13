@@ -103,10 +103,12 @@ class MainWindow(QMainWindow):
         button_publisher = QPushButton("")
         button_publisher.setIcon(QIcon("img/newspaper(W).svg"))
         button_publisher.setObjectName("sideButton")
+        button_book.setToolTip("Publisher")
 
         button_trans = QPushButton("")
         button_trans.setIcon(QIcon("img/earth-americas(W).svg"))
         button_trans.setObjectName("sideButton")
+        button_book.setToolTip("Translators")
 
         button_language = QPushButton("")
         button_language.setIcon(QIcon("img/language(W).svg"))
