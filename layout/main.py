@@ -113,10 +113,12 @@ class MainWindow(QMainWindow):
         button_language = QPushButton("")
         button_language.setIcon(QIcon("img/language(W).svg"))
         button_language.setObjectName("sideButton")
+        button_book.setToolTip("Languages")
 
         button_category = QPushButton("")
         button_category.setIcon(QIcon("img/layer-group(W).svg"))
         button_category.setObjectName("sideButton")
+        button_book.setToolTip("Categories")
 
         button_designer = QPushButton("")
         button_designer.setIcon(QIcon("img/compass-drafting(W).svg"))
