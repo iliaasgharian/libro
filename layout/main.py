@@ -39,7 +39,7 @@ class MainWindow(QMainWindow):
 
         book_menu = menu.addMenu("Book")
         member_menu = menu.addMenu("Members")
-        Setting_menu = menu.addMenu("Setting")
+        Setting_menu = menu.addMenu("Settings")
         help_menu =menu.addMenu("Help")
 
         book_menu.addAction(QAction("Add", self))
