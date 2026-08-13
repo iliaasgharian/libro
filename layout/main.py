@@ -88,6 +88,7 @@ class MainWindow(QMainWindow):
         button_book = QPushButton("")
         button_book.setIcon(QIcon("img/book(w).svg"))
         button_book.setObjectName("sideButton")
+        button_book.setToolTip("Books")
 
         button_user = QPushButton("")
         button_user.setIcon(QIcon("img/user(w).svg"))
