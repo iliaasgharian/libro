@@ -66,7 +66,7 @@ class MainWindow(QMainWindow):
 
         for btn in self.side_buttons:
             if btn is active_button:
-                btn.setStyleSheet("background-color: pink; border: none;")
+                btn.setStyleSheet("background-color: #7C3AEB; border: none;")
             else:
                 btn.setStyleSheet("")
 
