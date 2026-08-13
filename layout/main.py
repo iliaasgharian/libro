@@ -75,7 +75,7 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(central)
 
         main_layout = QHBoxLayout(central)
-        main_layout.setContentsMargins(0, 0, 0, 0)
+        main_layout.setContentsMargins(1, 2, 0, 2)
         main_layout.setSpacing(0)
 
         left_panell = QWidget()
