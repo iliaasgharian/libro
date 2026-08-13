@@ -103,22 +103,22 @@ class MainWindow(QMainWindow):
         button_publisher = QPushButton("")
         button_publisher.setIcon(QIcon("img/newspaper(W).svg"))
         button_publisher.setObjectName("sideButton")
-        button_book.setToolTip("Publisher")
+        button_publisher.setToolTip("Publisher")
 
         button_trans = QPushButton("")
         button_trans.setIcon(QIcon("img/earth-americas(W).svg"))
         button_trans.setObjectName("sideButton")
-        button_book.setToolTip("Translators")
+        button_trans.setToolTip("Translators")
 
         button_language = QPushButton("")
         button_language.setIcon(QIcon("img/language(W).svg"))
         button_language.setObjectName("sideButton")
-        button_book.setToolTip("Languages")
+        button_language.setToolTip("Languages")
 
         button_category = QPushButton("")
         button_category.setIcon(QIcon("img/layer-group(W).svg"))
         button_category.setObjectName("sideButton")
-        button_book.setToolTip("Categories")
+        button_category.setToolTip("Categories")
 
         button_designer = QPushButton("")
         button_designer.setIcon(QIcon("img/compass-drafting(W).svg"))
