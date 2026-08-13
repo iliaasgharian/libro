@@ -123,12 +123,12 @@ class MainWindow(QMainWindow):
         button_designer = QPushButton("")
         button_designer.setIcon(QIcon("img/compass-drafting(W).svg"))
         button_designer.setObjectName("sideButton")
-        button_book.setToolTip("Cover Designers")
+        button_designer.setToolTip("Cover Designers")
 
         button_resources = QPushButton("")
         button_resources.setIcon(QIcon("img/file-brackets-curly(W).svg"))
         button_resources.setObjectName("sideButton")
-        button_book.setToolTip("Resources")
+        button_resources.setToolTip("Resources")
 
 
         self.side_buttons = [
