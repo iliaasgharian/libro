@@ -93,12 +93,12 @@ class MainWindow(QMainWindow):
         button_user = QPushButton("")
         button_user.setIcon(QIcon("img/user(w).svg"))
         button_user.setObjectName("sideButton")
-        button_book.setToolTip("Users")
+        button_user.setToolTip("Users")
 
         button_author = QPushButton("")
         button_author.setIcon(QIcon("img/pencil-alt(W).svg"))
         button_author.setObjectName("sideButton")
-        button_book.setToolTip("Authors")
+        button_author.setToolTip("Authors")
 
         button_publisher = QPushButton("")
         button_publisher.setIcon(QIcon("img/newspaper(W).svg"))
