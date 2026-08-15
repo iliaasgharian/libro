@@ -320,8 +320,10 @@ class BookFilterForm(QWidget):
                 color: #ffffff;
                 border: 1px solid #4a4a4a;
                 border-radius: 6px;
-                padding: 4px 8px;
-                min-height: 25px;
+                padding: 8px 10px;
+                min-height: 34px;
+                min-width: 160px;
+                font-size: 11pt;
             }
             QDateEdit#release_date_edit:hover {
                 border: 1px solid #7C3AED;
@@ -330,12 +332,12 @@ class BookFilterForm(QWidget):
                 border: none;
                 border-top-right-radius: 6px;
                 border-bottom-right-radius: 6px;
-                width: 24px;
+                width: 30px;
                 background-color: #ffffff;
             }
             QDateEdit#release_date_edit::down-arrow {
-                width: 10px;
-                height: 10px;
+                width: 12px;
+                height: 12px;
             }
             QDateEdit#release_date_edit QAbstractItemView {
                 background-color: #2b2b2b;
