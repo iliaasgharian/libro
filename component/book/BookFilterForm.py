@@ -312,6 +312,93 @@ class BookFilterForm(QWidget):
         row.addLayout(self._labeled_field(label2, widget2))
         return row
 
+    def _style_release_date_edit(self):
+        """Dark-themes the release date field and its calendar popup to match the rest of the form."""
+        self.release_date_edit.setStyleSheet("""
+            QDateEdit#release_date_edit {
+                background-color: #2b2b2b;
+                color: #ffffff;
+                border: 1px solid #4a4a4a;
+                border-radius: 6px;
+                padding: 4px 8px;
+                min-height: 25px;
+            }
+            QDateEdit#release_date_edit:hover {
+                border: 1px solid #7C3AED;
+            }
+            QDateEdit#release_date_edit::drop-down {
+                border: none;
+                width: 22px;
+            }
+            QDateEdit#release_date_edit QAbstractItemView {
+                background-color: #2b2b2b;
+                color: #ffffff;
+                selection-background-color: #7C3AED;
+                selection-color: #ffffff;
+            }
+        """)
+
+        pal = self.release_date_edit.palette()
+        pal.setColor(pal.Text, Qt.white)
+        pal.setColor(pal.Base, Qt.black)
+        self.release_date_edit.setPalette(pal)
+
+        calendar = self.release_date_edit.calendarWidget()
+        calendar.setStyleSheet("""
+            QCalendarWidget {
+                background-color: #202020;
+                color: #ffffff;
+            }
+            QCalendarWidget QToolButton {
+                background-color: #202020;
+                color: #ffffff;
+                border: none;
+                border-radius: 4px;
+                padding: 4px 8px;
+                margin: 2px;
+            }
+            QCalendarWidget QToolButton:hover {
+                background-color: #2f2f2f;
+                color: #7C3AED;
+            }
+            QCalendarWidget QMenu {
+                background-color: #202020;
+                color: #ffffff;
+            }
+            QCalendarWidget QSpinBox {
+                background-color: #2b2b2b;
+                color: #ffffff;
+                border: 1px solid #4a4a4a;
+                border-radius: 4px;
+                selection-background-color: #7C3AED;
+                selection-color: #ffffff;
+            }
+            #qt_calendar_navigationbar {
+                background-color: #202020;
+            }
+            QCalendarWidget QWidget#qt_calendar_calendarview {
+                background-color: #202020;
+            }
+            QCalendarWidget QAbstractItemView:enabled {
+                background-color: #202020;
+                color: #f0f0f0;
+                selection-background-color: #7C3AED;
+                selection-color: #ffffff;
+                outline: none;
+            }
+            QCalendarWidget QAbstractItemView:disabled {
+                color: #555555;
+            }
+        """)
+
+        cal_pal = calendar.palette()
+        cal_pal.setColor(cal_pal.ButtonText, Qt.white)
+        cal_pal.setColor(cal_pal.WindowText, Qt.white)
+        cal_pal.setColor(cal_pal.Text, Qt.white)
+        cal_pal.setColor(cal_pal.Window, Qt.black)
+        cal_pal.setColor(cal_pal.Base, Qt.black)
+        calendar.setPalette(cal_pal)
+
     def setup_ui(self):
         layout = QVBoxLayout(self)
         layout.setSpacing(14)
@@ -339,9 +426,11 @@ class BookFilterForm(QWidget):
         self.age_group_edit.setPlaceholderText("e.g. Adult")
 
         self.release_date_edit = QDateEdit()
+        self.release_date_edit.setObjectName("release_date_edit")
         self.release_date_edit.setCalendarPopup(True)
         self.release_date_edit.setDisplayFormat("yyyy-MM-dd")
         self.release_date_edit.setDate(QDate.currentDate())
+        self._style_release_date_edit()
 
         layout.addLayout(self._field_row(
             "Age Group", self.age_group_edit,
