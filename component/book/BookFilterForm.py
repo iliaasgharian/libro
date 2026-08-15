@@ -328,7 +328,14 @@ class BookFilterForm(QWidget):
             }
             QDateEdit#release_date_edit::drop-down {
                 border: none;
-                width: 22px;
+                border-top-right-radius: 6px;
+                border-bottom-right-radius: 6px;
+                width: 24px;
+                background-color: #ffffff;
+            }
+            QDateEdit#release_date_edit::down-arrow {
+                width: 10px;
+                height: 10px;
             }
             QDateEdit#release_date_edit QAbstractItemView {
                 background-color: #2b2b2b;
