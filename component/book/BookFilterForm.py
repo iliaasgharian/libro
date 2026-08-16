@@ -104,7 +104,7 @@ class MultiSelectDialog(QDialog):
                 padding: 10px;
             }
             QPushButton#btn_send {
-                background-color: #7C3AED;
+                background-color: #3CB371;
                 color: white;
                 border: none;
                 border-radius: 6px;
@@ -490,7 +490,7 @@ class BookFilterForm(QWidget):
 
         btn_layout = QHBoxLayout()
         self.btn_reset = QPushButton("Reset")
-        self.btn_apply = QPushButton("Add book")
+        self.btn_apply = QPushButton("Submit")
         self.btn_apply.setObjectName("btn_send")
         btn_layout.addStretch()
         btn_layout.addWidget(self.btn_reset)
