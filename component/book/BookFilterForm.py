@@ -313,7 +313,7 @@ class BookFilterForm(QWidget):
         return row
 
     def _style_release_date_edit(self):
-        """Dark-themes the release date field and its calendar popup to match the rest of the form."""
+
         self.release_date_edit.setStyleSheet("""
             QDateEdit#release_date_edit {
                 background-color: #2b2b2b;
