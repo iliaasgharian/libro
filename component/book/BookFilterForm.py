@@ -249,7 +249,7 @@ class MultiSelectBox(QWidget):
         """)
 
     def set_items(self, items):
-        """items: iterable of (id, display_text, original_object)"""
+
         self._items = {}
         self._objects = {}
         for item_id, text, obj in items:
@@ -295,7 +295,7 @@ class BookFilterForm(QWidget):
         self.load_data()
 
     def _labeled_field(self, label_text, widget, label_width=110):
-        """Builds a horizontal row: label on the left, input on the right."""
+
         row = QHBoxLayout()
         row.setSpacing(8)
         label = QLabel(label_text)
@@ -305,7 +305,7 @@ class BookFilterForm(QWidget):
         return row
 
     def _field_row(self, label1, widget1, label2, widget2):
-        """Builds a horizontal row with two label+input pairs side by side."""
+
         row = QHBoxLayout()
         row.setSpacing(20)
         row.addLayout(self._labeled_field(label1, widget1))
