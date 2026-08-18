@@ -37,7 +37,7 @@ class MultiSelectDialog(QDialog):
 
         self.setStyleSheet("""
             QDialog#multiSelectDialog {
-                background-color: #ffffff;
+                background-color: #202020;
             }
             QLineEdit#dialogSearchInput {
                 background-color: #2b2b2b;
