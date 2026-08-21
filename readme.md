@@ -76,11 +76,6 @@ The app is now installed and ready to use — no Python, no extra libraries, no 
 
 ---
 
-## ⚠️ Currently Incomplete
-
-- Adding or editing a **book** directly from the app isn't finished yet — that screen is still a placeholder. Everything else (authors, publishers, categories, languages, designers, translators, resources) is fully usable.
-
----
 
 ## 🛠️ Built With
 
