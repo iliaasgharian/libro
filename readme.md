@@ -2,9 +2,9 @@
 
  A desktop library management application developed using Python and PyQt5 that utilizes an SQLite database. This project enables the addition, searching, editing, and management of books—as well as all related entities (including authors, publishers, translators, cover designers, languages, categories, and sources)—through a graphical user interface.
 
-|                             |  |
-|-----------------------------|---------|
-| ![example1](images/ex1.png) | ![example2](images/ex2.png) |
+|                             |  |                             |
+|-----------------------------|---------|-----------------------------|
+| ![example1](images/ex1.png) | ![example2](images/ex2.png) | ![example3](images/ex3.png) | 
 
 
 ## ✨ What It Does
